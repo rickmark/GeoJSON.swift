@@ -19,11 +19,13 @@ public protocol GeoJSONFeature {
 extension GeoJSONFeature {
     public static var type: String { return "Feature" }
     public var dictionaryRepresentation: [String: Any] {
+        let geometry : [ String: Any] = [
+            "coordinates": self.geometryCoordinates,
+            "type": Self.type
+        ]
+        
         return [
-            "geometry": [
-                "coordinates": self.geometryCoordinates,
-                "type": type(of: self).type
-            ],
+            "geometry": geometry,
             "type": "Feature",
             "properties": [:]
         ]
